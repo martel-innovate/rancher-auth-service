@@ -83,7 +83,7 @@ func (g *FClient) getFiwareUser(fiwareAccessToken string) (Account, error) {
 	}
 	defer resp.Body.Close()
 	var fiwareAcct Account
-	
+
 	log.Errorf("Received resp to getFiwareUser: %v", resp)
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
