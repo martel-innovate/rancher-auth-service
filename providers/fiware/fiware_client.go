@@ -35,7 +35,8 @@ func (g *FClient) getAccessToken(code string) (string, error) {
 	form.Add("client_secret", g.config.ClientSecret)
 	form.Add("code", code)
 	form.Add("grant_type", "authorization_code")
-	form.Add("redirect_uri", g.config.Scheme + g.config.Hostname)
+	//form.Add("redirect_uri", g.config.Scheme + g.config.Hostname)
+	form.Add("redirect_uri", g.config.RedirectURI)
 
 	url := g.getURL("TOKEN")
 
@@ -83,7 +84,7 @@ func (g *FClient) getFiwareUser(fiwareAccessToken string) (Account, error) {
 	}
 	defer resp.Body.Close()
 	var fiwareAcct Account
-
+	
 	log.Errorf("Received resp to getFiwareUser: %v", resp)
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
